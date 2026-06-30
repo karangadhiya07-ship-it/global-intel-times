@@ -7,16 +7,6 @@ type Article = {
   time: string;
 };
 
-const navItems = [
-  { label: "Top Stories", href: "#top-stories" },
-  { label: "Latest", href: "#latest" },
-  { label: "World", href: "#world" },
-  { label: "Business", href: "#business" },
-  { label: "Technology", href: "#technology" },
-  { label: "Finance", href: "#finance" },
-  { label: "Opinion", href: "#opinion" },
-];
-
 const footerLinks = [
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
@@ -289,76 +279,8 @@ function SectionBlock({
 }
 
 export default function Home() {
-  const today = "Tuesday, June 30, 2026";
-
   return (
     <>
-      <header className="site-header">
-        <div className="masthead">
-          <div className="content-container py-3 sm:py-4">
-            <div className="flex items-center justify-between text-xs text-[var(--color-ink-faint)]">
-              <span>{today}</span>
-              <span className="hidden sm:inline tracking-wide">
-                Independent · Original · Global
-              </span>
-              <span className="sm:hidden">Today&apos;s Edition</span>
-            </div>
-          </div>
-
-          <div className="masthead-inner">
-            <div className="content-container py-6 sm:py-8 text-center">
-              <p className="section-label mb-2">Est. 2026</p>
-              <h1 className="section-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight">
-                Global Intel Times
-              </h1>
-              <p className="mt-3 text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.28em] text-[var(--color-ink-muted)] uppercase">
-                All the News That&apos;s Fit to Publish — Originally
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <nav className="site-nav" aria-label="Primary">
-          <div className="content-container relative">
-            <div className="site-nav-inner py-3">
-              <a
-                href="#"
-                className="font-serif text-base sm:text-lg font-bold md:hidden"
-              >
-                GIT
-              </a>
-
-              <div className="nav-links flex-1">
-                {navItems.map((item) => (
-                  <a key={item.href} href={item.href} className="nav-link">
-                    {item.label}
-                  </a>
-                ))}
-              </div>
-
-              <details className="relative md:hidden">
-                <summary className="nav-toggle" aria-label="Open menu">
-                  Sections
-                </summary>
-                <div className="nav-mobile-panel">
-                  <div className="nav-mobile-links">
-                    {navItems.map((item) => (
-                      <a
-                        key={item.href}
-                        href={item.href}
-                        className="nav-mobile-link"
-                      >
-                        {item.label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </details>
-            </div>
-          </div>
-        </nav>
-      </header>
-
       <main className="flex-1">
         <div className="content-container">
           {/* Lead story */}

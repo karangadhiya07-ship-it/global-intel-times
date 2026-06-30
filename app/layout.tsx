@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Libre_Baskerville, Source_Sans_3 } from "next/font/google";
+import Header from "@/components/Header";
 import "./globals.css";
 
 const libreBaskerville = Libre_Baskerville({
@@ -42,7 +43,10 @@ export default function RootLayout({
       lang="en"
       className={`${libreBaskerville.variable} ${sourceSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
