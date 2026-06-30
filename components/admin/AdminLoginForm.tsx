@@ -1,9 +1,20 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import { FormEvent, useEffect, useState } from "react";
 
 const sessionCookieName = "git_admin_session";
+
+function hasAdminSession() {
+  return document.cookie
+    .split(";")
+    .map((cookie) => cookie.trim())
+    .some((cookie) => cookie.startsWith(`${sessionCookieName}=`));
+}
+
+function secureCookieSuffix() {
+  return window.location.protocol === "https:" ? "; Secure" : "";
+}
 
 type AdminLoginFormProps = {
   expectedUsername: string;
@@ -12,8 +23,17 @@ type AdminLoginFormProps = {
 
 export default function AdminLoginForm({ expectedUsername, expectedPassword }: AdminLoginFormProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      if (hasAdminSession()) {
+        router.replace("/admin");
+      }
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, [router]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -27,8 +47,8 @@ export default function AdminLoginForm({ expectedUsername, expectedPassword }: A
       return;
     }
 
-    document.cookie = `${sessionCookieName}=static-admin; path=/; max-age=86400; SameSite=Lax`;
-    router.replace(searchParams.get("next") || "/admin");
+    document.cookie = `${sessionCookieName}=static-admin; path=/; max-age=86400; SameSite=Strict${secureCookieSuffix()}`;
+    router.replace("/admin");
   }
 
   return (
