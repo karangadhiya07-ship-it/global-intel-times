@@ -1845,3 +1845,128 @@ a {
   font-size: 0.875rem;
   font-weight: 700;
 }
+
+/* Admin styling hardening */
+.admin-shell {
+  isolation: isolate;
+  width: 100%;
+  min-height: calc(100vh - 1px);
+  background:
+    linear-gradient(180deg, #ffffff 0, #f4f4f2 14rem),
+    #f4f4f2;
+}
+
+.admin-main {
+  background: #f4f4f2;
+}
+
+.admin-content {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+}
+
+.admin-panel,
+.admin-metrics article,
+.admin-login-card {
+  box-shadow: 0 16px 40px rgba(18, 18, 18, 0.04);
+}
+
+.admin-sidebar {
+  box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.06);
+}
+
+.admin-sidebar nav a,
+.admin-sidebar-brand,
+.admin-header-link,
+.admin-button,
+.admin-logout,
+.admin-row-actions button {
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.admin-sidebar nav a:hover,
+.admin-sidebar nav a:focus-visible,
+.admin-header-link:hover,
+.admin-header-link:focus-visible,
+.admin-button:hover,
+.admin-button:focus-visible,
+.admin-logout:hover,
+.admin-logout:focus-visible {
+  transform: translateY(-1px);
+}
+
+.admin-settings-panel {
+  max-width: 48rem;
+}
+
+.admin-form-primary,
+.admin-form-secondary,
+.admin-settings-panel {
+  border-color: #d7d7d2;
+}
+
+.admin-field-group input:focus,
+.admin-field-group textarea:focus,
+.admin-field-group select:focus,
+.admin-toolbar input:focus,
+.admin-toolbar select:focus,
+.admin-login-form input:focus {
+  border-color: var(--color-ink);
+  box-shadow: 0 0 0 3px rgba(18, 18, 18, 0.08);
+  outline: none;
+}
+
+.admin-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.admin-category-list article:first-child,
+.admin-media-card:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.admin-login-page {
+  background:
+    radial-gradient(circle at top, rgba(18, 18, 18, 0.08), transparent 24rem),
+    #f4f4f2;
+}
+
+.admin-login-card {
+  position: relative;
+}
+
+.admin-login-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--color-ink);
+}
+
+@media (max-width: 759px) {
+  .admin-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-header-actions {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .admin-header-link,
+  .admin-logout:not(.admin-logout--compact) {
+    flex: 1;
+  }
+
+  .admin-category-list article,
+  .admin-media-card {
+    grid-template-columns: 1fr;
+  }
+}
