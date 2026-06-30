@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 const navItems = [
@@ -49,6 +50,10 @@ export default function Header() {
             <time className="header-date" dateTime="2026-06-30">
               Tuesday, June 30, 2026
             </time>
+            <div className="header-edition" aria-label="Current edition">
+              <span>U.S. Edition</span>
+              <span>Markets Open</span>
+            </div>
             <p className="header-weather">
               <strong>72°F</strong> · Partly Cloudy · New York
             </p>
@@ -57,8 +62,8 @@ export default function Header() {
 
         <div className="header-breaking">
           <div className="content-container header-breaking-inner">
-            <span className="header-breaking-label">Breaking</span>
-            <div className="header-ticker-wrap">
+            <span className="header-breaking-label">Live Briefing</span>
+            <div className="header-ticker-wrap" aria-label="Breaking news headlines">
               <div className="header-ticker-track">
                 {[...breakingItems, ...breakingItems].map((item, index) => (
                   <a href="#" className="header-ticker-item" key={index}>
@@ -75,24 +80,28 @@ export default function Header() {
             <button
               type="button"
               className="header-icon-btn header-menu-btn"
-              aria-label="Open menu"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              aria-controls="site-mobile-menu"
               onClick={() => setMenuOpen((value) => !value)}
             >
               <HamburgerIcon open={menuOpen} />
             </button>
 
-            <a href="/" className="header-logo">
+            <Link href="/" className="header-logo">
               <span className="header-logo-kicker">Est. 2026</span>
               <span className="header-logo-title">Global Intel Times</span>
               <span className="header-logo-tagline">
                 Original Journalism · Global Perspective
               </span>
-            </a>
+            </Link>
 
             <button
               type="button"
               className="header-icon-btn header-search-btn"
-              aria-label="Search"
+              aria-label={searchOpen ? "Close search" : "Search"}
+              aria-expanded={searchOpen}
+              aria-controls="site-search-panel"
               onClick={() => setSearchOpen((value) => !value)}
             >
               <SearchIcon />
@@ -101,7 +110,7 @@ export default function Header() {
         </div>
 
         {searchOpen && (
-          <div className="header-search-panel header-search-panel--open">
+          <div id="site-search-panel" className="header-search-panel header-search-panel--open">
             <div className="content-container">
               <form className="header-search-form" onSubmit={(e) => e.preventDefault()}>
                 <input
@@ -132,7 +141,9 @@ export default function Header() {
             <button
               type="button"
               className="header-nav-search"
-              aria-label="Search"
+              aria-label={searchOpen ? "Close search" : "Search"}
+              aria-expanded={searchOpen}
+              aria-controls="site-search-panel"
               onClick={() => setSearchOpen((value) => !value)}
             >
               <SearchIcon />
@@ -141,7 +152,7 @@ export default function Header() {
         </nav>
 
         {menuOpen && (
-          <div className="header-mobile-panel header-mobile-panel--open">
+          <div id="site-mobile-menu" className="header-mobile-panel header-mobile-panel--open">
             <ul className="header-mobile-list">
               {navItems.map((item) => (
                 <li key={item.href}>
