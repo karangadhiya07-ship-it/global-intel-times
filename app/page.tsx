@@ -5,6 +5,8 @@ type Article = {
   summary: string;
   author: string;
   time: string;
+  publishedDate?: string;
+  breaking?: boolean;
 };
 
 const footerLinks = [
@@ -24,7 +26,45 @@ const leadStory: Article = {
     "Diplomats and policy analysts describe a period of unusual realignment, with new trade corridors, security partnerships, and energy agreements reshaping long-standing assumptions about influence in Europe, Asia, and the Americas.",
   author: "Elena Vasquez",
   time: "12 min read",
+  publishedDate: "June 30, 2026",
+  breaking: true,
 };
+
+const heroSecondary: Article[] = [
+  {
+    id: "top-1",
+    category: "Business",
+    headline:
+      "Manufacturers Invest in Regional Supply Networks to Reduce Volatility",
+    summary:
+      "Companies are building dual sourcing models and near-shore production capacity after years of disruption.",
+    author: "James Okonkwo",
+    time: "8 min read",
+    publishedDate: "June 30, 2026",
+  },
+  {
+    id: "top-2",
+    category: "Technology",
+    headline:
+      "Enterprise Adoption of AI Assistants Accelerates in Regulated Industries",
+    summary:
+      "Legal, health, and financial firms report measured rollouts focused on compliance and auditability.",
+    author: "Priya Mehta",
+    time: "6 min read",
+    publishedDate: "June 29, 2026",
+  },
+  {
+    id: "top-3",
+    category: "Finance",
+    headline:
+      "Central Banks Signal Caution as Inflation Data Sends Mixed Signals",
+    summary:
+      "Markets are pricing in a slower path of rate adjustments amid uneven price pressures.",
+    author: "Robert Chen",
+    time: "7 min read",
+    publishedDate: "June 29, 2026",
+  },
+];
 
 const topStories: Article[] = [
   {
@@ -220,6 +260,101 @@ const sectionArticles: Record<string, Article[]> = {
   ],
 };
 
+function HeroSection({
+  featured,
+  secondary,
+}: {
+  featured: Article;
+  secondary: Article[];
+}) {
+  return (
+    <section className="hero" aria-label="Featured stories">
+      <div className="hero-grid">
+        <article className="hero-featured">
+          <a href="#" className="hero-featured-link group">
+            <figure className="hero-image hero-image--lead">
+              <span className="hero-image-label">Photo Illustration</span>
+            </figure>
+            <div className="hero-featured-body">
+              <div className="hero-badges">
+                {featured.breaking && (
+                  <span className="hero-badge hero-badge--breaking">
+                    Breaking
+                  </span>
+                )}
+                <span className="hero-badge hero-badge--category">
+                  {featured.category}
+                </span>
+              </div>
+              <h2 className="hero-headline">{featured.headline}</h2>
+              <p className="hero-dek">{featured.summary}</p>
+              <footer className="hero-byline">
+                <span className="hero-byline-author">{featured.author}</span>
+                {featured.publishedDate && (
+                  <>
+                    <span className="hero-byline-sep" aria-hidden="true">
+                      ·
+                    </span>
+                    <time dateTime="2026-06-30">{featured.publishedDate}</time>
+                  </>
+                )}
+                <span className="hero-byline-sep" aria-hidden="true">
+                  ·
+                </span>
+                <span>{featured.time}</span>
+              </footer>
+            </div>
+          </a>
+        </article>
+
+        <aside className="hero-secondary" aria-label="More featured stories">
+          <p className="hero-secondary-label">Also in the News</p>
+          <ul className="hero-secondary-list">
+            {secondary.map((article) => (
+              <li key={article.id}>
+                <article className="hero-secondary-item group">
+                  <a href="#" className="hero-secondary-link">
+                    <figure className="hero-image hero-image--thumb">
+                      <span className="hero-image-label">Photo</span>
+                    </figure>
+                    <div className="hero-secondary-content">
+                      <span className="hero-badge hero-badge--category hero-badge--sm">
+                        {article.category}
+                      </span>
+                      <h3 className="hero-secondary-headline">
+                        {article.headline}
+                      </h3>
+                      <footer className="hero-byline hero-byline--compact">
+                        <span className="hero-byline-author">
+                          {article.author}
+                        </span>
+                        {article.publishedDate && (
+                          <>
+                            <span className="hero-byline-sep" aria-hidden="true">
+                              ·
+                            </span>
+                            <time dateTime="2026-06-29">
+                              {article.publishedDate}
+                            </time>
+                          </>
+                        )}
+                        <span className="hero-byline-sep" aria-hidden="true">
+                          ·
+                        </span>
+                        <span>{article.time}</span>
+                      </footer>
+                    </div>
+                  </a>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      </div>
+    </section>
+  );
+}
+
 function ArticleCard({
   article,
   size = "default",
@@ -283,36 +418,7 @@ export default function Home() {
     <>
       <main className="flex-1">
         <div className="content-container">
-          {/* Lead story */}
-          <section className="py-8 sm:py-12 border-b border-[var(--color-rule)]">
-            <div className="grid gap-8 lg:grid-cols-[1fr_300px] lg:gap-12">
-              <div>
-                <p className="section-label">Lead Story</p>
-                <ArticleCard article={leadStory} size="lead" />
-              </div>
-              <aside className="lg:border-l lg:border-[var(--color-rule)] lg:pl-8">
-                <p className="section-label mb-4">In Brief</p>
-                <ul className="space-y-4">
-                  {topStories.slice(0, 3).map((story) => (
-                    <li
-                      key={story.id}
-                      className="border-t border-[var(--color-rule)] pt-3 first:border-t-0 first:pt-0"
-                    >
-                      <p className="article-kicker text-[0.625rem]">
-                        {story.category}
-                      </p>
-                      <a
-                        href="#"
-                        className="article-headline text-base mt-1 block hover:opacity-75"
-                      >
-                        {story.headline}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </aside>
-            </div>
-          </section>
+          <HeroSection featured={leadStory} secondary={heroSecondary} />
 
           <div
             className="ad-slot ad-slot-leaderboard my-6 sm:my-8"
