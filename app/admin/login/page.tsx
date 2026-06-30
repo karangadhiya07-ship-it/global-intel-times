@@ -47,9 +47,6 @@ export default function AdminLoginPage() {
           Login
         </button>
 
-        <p style={{ marginTop: 16, fontSize: 12 }}>
-          Demo: admin / admin123
-        </p>
       </form>
     </main>
   );
