@@ -69,9 +69,14 @@ export default function ArticleForm({ mode, article }: ArticleFormProps) {
               Breaking
             </label>
           </div>
-          <button type="button" className="admin-button">
-            {mode === "new" ? "Create draft preview" : "Update draft preview"}
-          </button>
+          <div className="admin-form-actions">
+            <button type="button" className="admin-button admin-button--secondary">
+              Save Draft
+            </button>
+            <button type="button" className="admin-button">
+              Publish
+            </button>
+          </div>
           <p className="admin-form-note">UI only. Data persistence will be added in a later CMS phase.</p>
         </aside>
       </div>

@@ -20,6 +20,15 @@ export type AdminCategory = {
   articleCount: number;
 };
 
+export type AdminMediaFile = {
+  id: string;
+  title: string;
+  type: "image" | "video";
+  url: string;
+  uploadedAt: string;
+  usedIn: string;
+};
+
 export const adminArticles: AdminArticlePreview[] = [
   {
     id: "article-001",
@@ -84,6 +93,33 @@ export const adminCategories: AdminCategory[] = [
     slug: "finance",
     description: "Banking, policy, rates, capital markets, and investment trends.",
     articleCount: 5,
+  },
+];
+
+export const adminMediaFiles: AdminMediaFile[] = [
+  {
+    id: "media-001",
+    title: "Global diplomacy hero",
+    type: "image",
+    url: "https://example.com/global-diplomacy.jpg",
+    uploadedAt: "2026-06-30",
+    usedIn: "Global Powers Recalibrate Strategy",
+  },
+  {
+    id: "media-002",
+    title: "Manufacturing floor briefing",
+    type: "video",
+    url: "https://example.com/manufacturing-briefing.mp4",
+    uploadedAt: "2026-06-29",
+    usedIn: "Manufacturers Invest in Regional Supply Networks",
+  },
+  {
+    id: "media-003",
+    title: "Enterprise AI dashboard",
+    type: "image",
+    url: "https://example.com/enterprise-ai-dashboard.jpg",
+    uploadedAt: "2026-06-29",
+    usedIn: "Enterprise AI Assistants",
   },
 ];
 

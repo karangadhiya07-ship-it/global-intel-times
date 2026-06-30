@@ -5,6 +5,7 @@ const adminLinks = [
   { label: "Articles", href: "/admin/articles" },
   { label: "New Article", href: "/admin/articles/new" },
   { label: "Categories", href: "/admin/categories" },
+  { label: "Media", href: "/admin/media" },
   { label: "Settings", href: "/admin/settings" },
 ];
 

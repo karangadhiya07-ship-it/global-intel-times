@@ -16,6 +16,31 @@ export default function AdminArticlesPage() {
             New article
           </Link>
         </div>
+
+        <form className="admin-toolbar" aria-label="Article filters">
+          <label>
+            <span>Search</span>
+            <input type="search" name="search" placeholder="Search articles" />
+          </label>
+          <label>
+            <span>Category</span>
+            <select name="category" defaultValue="all">
+              <option value="all">All categories</option>
+              <option value="World">World</option>
+              <option value="Business">Business</option>
+              <option value="Technology">Technology</option>
+              <option value="Finance">Finance</option>
+            </select>
+          </label>
+          <label>
+            <span>Status</span>
+            <select name="status" defaultValue="all">
+              <option value="all">All statuses</option>
+              <option value="draft">Draft</option>
+              <option value="published">Published</option>
+            </select>
+          </label>
+        </form>
         <div className="admin-table-wrap">
           <table className="admin-table">
             <thead>
@@ -25,7 +50,7 @@ export default function AdminArticlesPage() {
                 <th>Author</th>
                 <th>Status</th>
                 <th>Flags</th>
-                <th>Edit</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -39,7 +64,10 @@ export default function AdminArticlesPage() {
                   </td>
                   <td>{[article.featured && "Featured", article.breaking && "Breaking"].filter(Boolean).join(", ") || "None"}</td>
                   <td>
-                    <Link href={`/admin/articles/${article.id}/edit`}>Edit</Link>
+                    <div className="admin-row-actions">
+                      <Link href={`/admin/articles/${article.id}/edit`}>Edit</Link>
+                      <button type="button">Delete</button>
+                    </div>
                   </td>
                 </tr>
               ))}

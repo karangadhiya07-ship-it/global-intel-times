@@ -1,7 +1,7 @@
 import Link from "next/link";
 import AdminLayout from "@/components/admin/AdminLayout";
 import StatusBadge from "@/components/admin/StatusBadge";
-import { adminArticles, adminCategories } from "@/lib/admin";
+import { adminArticles, adminCategories, adminMediaFiles } from "@/lib/admin";
 
 export default function AdminDashboardPage() {
   const publishedCount = adminArticles.filter((article) => article.status === "published").length;
@@ -25,6 +25,10 @@ export default function AdminDashboardPage() {
         <article>
           <span>Categories</span>
           <strong>{adminCategories.length}</strong>
+        </article>
+        <article>
+          <span>Media Files</span>
+          <strong>{adminMediaFiles.length}</strong>
         </article>
       </section>
 

@@ -6,10 +6,13 @@ export default function AdminSettingsPage() {
     <AdminLayout title="Settings" eyebrow="Publication controls">
       <section className="admin-panel admin-settings-panel">
         <form className="admin-form">
-          <FieldGroup label="Publication name" htmlFor="publication-name">
-            <input id="publication-name" name="publicationName" type="text" defaultValue="Global Intel Times" />
+          <FieldGroup label="Site name" htmlFor="site-name">
+            <input id="site-name" name="siteName" type="text" defaultValue="Global Intel Times" />
           </FieldGroup>
-          <FieldGroup label="Default SEO description" htmlFor="default-description">
+          <FieldGroup label="Logo text" htmlFor="logo-text">
+            <input id="logo-text" name="logoText" type="text" defaultValue="Global Intel Times" />
+          </FieldGroup>
+          <FieldGroup label="Site description" htmlFor="default-description">
             <textarea
               id="default-description"
               name="defaultDescription"
@@ -17,8 +20,11 @@ export default function AdminSettingsPage() {
               defaultValue="Original reporting and analysis on world affairs, business, technology, finance, and opinion."
             />
           </FieldGroup>
-          <FieldGroup label="Editorial contact" htmlFor="editorial-contact">
+          <FieldGroup label="Contact email" htmlFor="editorial-contact">
             <input id="editorial-contact" name="editorialContact" type="email" defaultValue="newsroom@globalinteltimes.com" />
+          </FieldGroup>
+          <FieldGroup label="SEO defaults" htmlFor="seo-defaults">
+            <textarea id="seo-defaults" name="seoDefaults" rows={5} defaultValue="Global Intel Times | Original Journalism & Global Analysis" />
           </FieldGroup>
           <FieldGroup label="Static export mode" htmlFor="export-mode" hint="Kept enabled for Cloudflare Pages static export compatibility.">
             <select id="export-mode" name="exportMode" defaultValue="enabled">
