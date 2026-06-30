@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AdminLogoutButton from "@/components/admin/AdminLogoutButton";
 
 const adminLinks = [
   { label: "Dashboard", href: "/admin" },
@@ -23,6 +24,7 @@ export default function AdminSidebar() {
           </Link>
         ))}
       </nav>
+      <AdminLogoutButton compact />
     </aside>
   );
 }
