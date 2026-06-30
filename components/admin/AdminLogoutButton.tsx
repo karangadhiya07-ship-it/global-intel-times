@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-const sessionStorageKey = "git_admin_session";
+const sessionStorageKey = "git_admin_auth";
 
 export default function AdminLogoutButton({ compact = false }: { compact?: boolean }) {
   const router = useRouter();

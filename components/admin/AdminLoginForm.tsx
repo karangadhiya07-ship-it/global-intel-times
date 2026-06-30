@@ -3,10 +3,10 @@
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
-const sessionStorageKey = "git_admin_session";
+const sessionStorageKey = "git_admin_auth";
 
 function hasAdminSession() {
-  return window.localStorage.getItem(sessionStorageKey) === "demo-authenticated";
+  return window.localStorage.getItem(sessionStorageKey) === "true";
 }
 
 type AdminLoginFormProps = {
@@ -40,7 +40,7 @@ export default function AdminLoginForm({ expectedUsername, expectedPassword }: A
       return;
     }
 
-    window.localStorage.setItem(sessionStorageKey, "demo-authenticated");
+    window.localStorage.setItem(sessionStorageKey, "true");
     router.replace("/admin");
   }
 

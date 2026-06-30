@@ -3,10 +3,10 @@
 import { usePathname, useRouter } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
 
-const sessionStorageKey = "git_admin_session";
+const sessionStorageKey = "git_admin_auth";
 
 function hasAdminSession() {
-  return window.localStorage.getItem(sessionStorageKey) === "demo-authenticated";
+  return window.localStorage.getItem(sessionStorageKey) === "true";
 }
 
 export default function AdminAuthGuard({ children }: { children: ReactNode }) {
