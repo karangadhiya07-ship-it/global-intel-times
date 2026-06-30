@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import AdminLoginForm from "@/components/admin/AdminLoginForm";
 
-// TODO: Replace these temporary static credentials with environment variables or real auth before production.
+// TODO: Replace this demo auth with real server-side authentication before production.
 const temporaryAdminCredentials = {
   username: "admin",
   password: "admin123",

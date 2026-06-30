@@ -2,17 +2,13 @@
 
 import { useRouter } from "next/navigation";
 
-const sessionCookieName = "git_admin_session";
-
-function secureCookieSuffix() {
-  return window.location.protocol === "https:" ? "; Secure" : "";
-}
+const sessionStorageKey = "git_admin_session";
 
 export default function AdminLogoutButton({ compact = false }: { compact?: boolean }) {
   const router = useRouter();
 
   function logout() {
-    document.cookie = `${sessionCookieName}=; path=/; max-age=0; SameSite=Strict${secureCookieSuffix()}`;
+    window.localStorage.removeItem(sessionStorageKey);
     router.replace("/admin/login");
   }
 

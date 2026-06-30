@@ -3,17 +3,10 @@
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
-const sessionCookieName = "git_admin_session";
+const sessionStorageKey = "git_admin_session";
 
 function hasAdminSession() {
-  return document.cookie
-    .split(";")
-    .map((cookie) => cookie.trim())
-    .some((cookie) => cookie.startsWith(`${sessionCookieName}=`));
-}
-
-function secureCookieSuffix() {
-  return window.location.protocol === "https:" ? "; Secure" : "";
+  return window.localStorage.getItem(sessionStorageKey) === "demo-authenticated";
 }
 
 type AdminLoginFormProps = {
@@ -47,7 +40,7 @@ export default function AdminLoginForm({ expectedUsername, expectedPassword }: A
       return;
     }
 
-    document.cookie = `${sessionCookieName}=static-admin; path=/; max-age=86400; SameSite=Strict${secureCookieSuffix()}`;
+    window.localStorage.setItem(sessionStorageKey, "demo-authenticated");
     router.replace("/admin");
   }
 

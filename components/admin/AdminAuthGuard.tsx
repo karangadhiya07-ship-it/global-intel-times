@@ -3,13 +3,10 @@
 import { usePathname, useRouter } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
 
-const sessionCookieName = "git_admin_session";
+const sessionStorageKey = "git_admin_session";
 
 function hasAdminSession() {
-  return document.cookie
-    .split(";")
-    .map((cookie) => cookie.trim())
-    .some((cookie) => cookie.startsWith(`${sessionCookieName}=`));
+  return window.localStorage.getItem(sessionStorageKey) === "demo-authenticated";
 }
 
 export default function AdminAuthGuard({ children }: { children: ReactNode }) {
@@ -32,8 +29,7 @@ export default function AdminAuthGuard({ children }: { children: ReactNode }) {
         return;
       }
 
-      const next = encodeURIComponent(pathname || "/admin");
-      router.replace(`/admin/login?next=${next}`);
+      router.replace("/admin/login");
       setChecked(true);
     }, 0);
 
