@@ -32,67 +32,37 @@ const leadStory: Article = {
 
 const heroSecondary: Article[] = [
   {
-    id: "latest-headline-1",
+    id: "top-1",
     category: "Business",
     headline:
       "Manufacturers Invest in Regional Supply Networks to Reduce Volatility",
     summary:
       "Companies are building dual sourcing models and near-shore production capacity after years of disruption.",
     author: "James Okonkwo",
-    time: "24 min ago",
+    time: "8 min read",
     publishedDate: "June 30, 2026",
   },
   {
-    id: "latest-headline-2",
+    id: "top-2",
     category: "Technology",
     headline:
-      "Enterprise AI Assistants Move Deeper Into Regulated Industries",
+      "Enterprise Adoption of AI Assistants Accelerates in Regulated Industries",
     summary:
       "Legal, health, and financial firms report measured rollouts focused on compliance and auditability.",
     author: "Priya Mehta",
-    time: "41 min ago",
-    publishedDate: "June 30, 2026",
+    time: "6 min read",
+    publishedDate: "June 29, 2026",
   },
   {
-    id: "latest-headline-3",
+    id: "top-3",
     category: "Finance",
     headline:
       "Central Banks Signal Caution as Inflation Data Sends Mixed Signals",
     summary:
       "Markets are pricing in a slower path of rate adjustments amid uneven price pressures.",
     author: "Robert Chen",
-    time: "1 hr ago",
-    publishedDate: "June 30, 2026",
-  },
-  {
-    id: "latest-headline-4",
-    category: "World",
-    headline: "Summit Delegates Debate Maritime Security Cooperation Framework",
-    summary:
-      "Proposals include shared patrol standards and coordinated response protocols for commercial shipping lanes.",
-    author: "Maria Santos",
-    time: "2 hrs ago",
-    publishedDate: "June 30, 2026",
-  },
-  {
-    id: "latest-headline-5",
-    category: "Markets",
-    headline: "Bond Investors Watch Fiscal Plans as Spending Priorities Shift",
-    summary:
-      "Investors are assessing how infrastructure and defense outlays may affect borrowing costs over the next year.",
-    author: "Thomas Wright",
-    time: "3 hrs ago",
-    publishedDate: "June 30, 2026",
-  },
-  {
-    id: "latest-headline-6",
-    category: "Opinion",
-    headline: "Local Journalism Remains Essential to Global Understanding",
-    summary:
-      "National narratives often miss granular reporting that explains how policy actually reaches communities.",
-    author: "Nina Kowalski",
-    time: "4 hrs ago",
-    publishedDate: "June 30, 2026",
+    time: "7 min read",
+    publishedDate: "June 29, 2026",
   },
 ];
 
@@ -299,6 +269,8 @@ function HeroSection({
   secondary: Article[];
   strip: Article[];
 }) {
+  const latestHeadlines = [...secondary, ...strip].slice(0, 6);
+
   return (
     <section className="hero" aria-label="Featured stories">
       <div className="hero-layout">
@@ -336,7 +308,7 @@ function HeroSection({
             <p>Latest Headlines</p>
           </div>
           <ol className="hero-latest-list">
-            {secondary.map((article) => (
+            {latestHeadlines.map((article) => (
               <li key={article.id}>
                 <a href="#" className="hero-latest-link">
                   <span className="hero-latest-badge">{article.category}</span>
@@ -437,7 +409,11 @@ export default function Home() {
     <>
       <main className="flex-1">
         <div className="content-container">
-          <HeroSection featured={leadStory} secondary={heroSecondary} strip={topStories} />
+          <HeroSection
+            featured={leadStory}
+            secondary={heroSecondary}
+            strip={topStories}
+          />
 
           <div
             className="ad-slot ad-slot-leaderboard my-6 sm:my-8"
