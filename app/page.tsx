@@ -263,84 +263,93 @@ const sectionArticles: Record<string, Article[]> = {
 function HeroSection({
   featured,
   secondary,
-  strip,
 }: {
   featured: Article;
   secondary: Article[];
-  strip: Article[];
 }) {
-  const latestHeadlines = [...secondary, ...strip].slice(0, 6);
-
   return (
     <section className="hero" aria-label="Featured stories">
-      <div className="hero-layout">
-        <article className="hero-lead">
-          <div className="hero-lead-copy">
-            <p className="hero-category">{featured.category}</p>
-            <h1 className="hero-lead-headline">
-              <a href="#">{featured.headline}</a>
-            </h1>
-            <p className="hero-lead-summary">{featured.summary}</p>
-            <div className="hero-lead-meta" aria-label="Featured story details">
-              <span>By {featured.author}</span>
-              <span aria-hidden="true">|</span>
-              <span>{featured.time}</span>
-              {featured.publishedDate && (
-                <>
-                  <span aria-hidden="true">|</span>
-                  <time dateTime="2026-06-30">{featured.publishedDate}</time>
-                </>
-              )}
+      <div className="hero-grid">
+        <article className="hero-featured">
+          <a href="#" className="hero-featured-link group">
+            <figure className="hero-image hero-image--lead">
+              <span className="hero-image-label">Photo Illustration</span>
+            </figure>
+            <div className="hero-featured-body">
+              <div className="hero-badges">
+                {featured.breaking && (
+                  <span className="hero-badge hero-badge--breaking">
+                    Breaking
+                  </span>
+                )}
+                <span className="hero-badge hero-badge--category">
+                  {featured.category}
+                </span>
+              </div>
+              <h2 className="hero-headline">{featured.headline}</h2>
+              <p className="hero-dek">{featured.summary}</p>
+              <footer className="hero-byline">
+                <span className="hero-byline-author">{featured.author}</span>
+                {featured.publishedDate && (
+                  <>
+                    <span className="hero-byline-sep" aria-hidden="true">
+                      ·
+                    </span>
+                    <time dateTime="2026-06-30">{featured.publishedDate}</time>
+                  </>
+                )}
+                <span className="hero-byline-sep" aria-hidden="true">
+                  ·
+                </span>
+                <span>{featured.time}</span>
+              </footer>
             </div>
-          </div>
-
-          <figure className="hero-photo hero-photo--lead">
-            <span className="hero-photo-label">Image Placeholder</span>
-          </figure>
-
-          <a href="#" className="hero-continue-link">
-            Continue Reading
           </a>
         </article>
 
-        <aside className="hero-latest" aria-label="Latest headlines">
-          <div className="hero-latest-heading">
-            <p>Latest Headlines</p>
-          </div>
-          <ol className="hero-latest-list">
-            {latestHeadlines.map((article) => (
+        <aside className="hero-secondary" aria-label="More featured stories">
+          <p className="hero-secondary-label">Also in the News</p>
+          <ul className="hero-secondary-list">
+            {secondary.map((article) => (
               <li key={article.id}>
-                <a href="#" className="hero-latest-link">
-                  <span className="hero-latest-badge">{article.category}</span>
-                  <h2>{article.headline}</h2>
-                  <time dateTime="2026-06-30">{article.time}</time>
-                </a>
+                <article className="hero-secondary-item group">
+                  <a href="#" className="hero-secondary-link">
+                    <figure className="hero-image hero-image--thumb">
+                      <span className="hero-image-label">Photo</span>
+                    </figure>
+                    <div className="hero-secondary-content">
+                      <span className="hero-badge hero-badge--category hero-badge--sm">
+                        {article.category}
+                      </span>
+                      <h3 className="hero-secondary-headline">
+                        {article.headline}
+                      </h3>
+                      <footer className="hero-byline hero-byline--compact">
+                        <span className="hero-byline-author">
+                          {article.author}
+                        </span>
+                        {article.publishedDate && (
+                          <>
+                            <span className="hero-byline-sep" aria-hidden="true">
+                              ·
+                            </span>
+                            <time dateTime="2026-06-29">
+                              {article.publishedDate}
+                            </time>
+                          </>
+                        )}
+                        <span className="hero-byline-sep" aria-hidden="true">
+                          ·
+                        </span>
+                        <span>{article.time}</span>
+                      </footer>
+                    </div>
+                  </a>
+                </article>
               </li>
             ))}
-          </ol>
+          </ul>
         </aside>
-      </div>
-
-      <div className="hero-news-strip" aria-label="More top stories">
-        {strip.map((article) => (
-          <article className="hero-strip-card" key={article.id}>
-            <a href="#" className="hero-strip-link">
-              <figure className="hero-photo hero-photo--strip">
-                <span className="hero-photo-label">Image Placeholder</span>
-              </figure>
-              <div className="hero-strip-body">
-                <p className="hero-category">{article.category}</p>
-                <h2>{article.headline}</h2>
-                <p>{article.summary}</p>
-                <div className="hero-strip-meta">
-                  <span>{article.author}</span>
-                  <span aria-hidden="true">|</span>
-                  <span>{article.time}</span>
-                </div>
-              </div>
-            </a>
-          </article>
-        ))}
       </div>
     </section>
   );
@@ -409,11 +418,7 @@ export default function Home() {
     <>
       <main className="flex-1">
         <div className="content-container">
-          <HeroSection
-            featured={leadStory}
-            secondary={heroSecondary}
-            strip={topStories}
-          />
+          <HeroSection featured={leadStory} secondary={heroSecondary} />
 
           <div
             className="ad-slot ad-slot-leaderboard my-6 sm:my-8"
