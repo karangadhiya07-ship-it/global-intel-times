@@ -21,7 +21,7 @@ export default async function EditArticlePage({ params }: EditArticleProps) {
 
   return (
     <AdminLayout title="Edit article" eyebrow={article.title}>
-      <ArticleForm mode="edit" article={article} />
+      <ArticleForm mode="edit" articleId={article.id} />
     </AdminLayout>
   );
 }
